@@ -6,18 +6,37 @@ import {
     ScrollView,
     TextInput,
 } from 'react-native';
+import * as Font from 'expo-font';
 import { StatusBar } from 'expo-status-bar';
+
+let customFonts = {
+    'Raleway-Bold': require('../assets/Fonts/Raleway/Raleway-Bold.ttf'),
+    'Raleway-Medium': require('../assets/Fonts/Raleway/Raleway-Medium.ttf'),
+}
 
 class HomeScreen extends Component {
     constructor(props) {
         super(props);
         this.state = {
             input: 0,
+            fontsLoaded: false,
         }
+    }
+
+    async _loadFontsAsync() {
+        await Font.loadAsync(customFonts);
+        this.setState({ fontsLoaded: true });
+    }
+
+    componentDidMount() {
+        this._loadFontsAsync();
     }
 
     render() {
         const inputVal = this.state.input;
+        if (!this.state.fontsLoaded) {
+            return null;
+        }
         return (
             <ScrollView contentContainerStyle={styles.container}>
                 <StatusBar style="auto" />
@@ -67,17 +86,18 @@ const styles = StyleSheet.create({
         width: '100%',
         alignItems: 'center',
         justifyContent: 'center',
-        backgroundColor: '#1F2937',
+        backgroundColor: '#2c3f50',
     },
     input: {
         borderWidth: 1,
-        borderColor: '#B295FF',
+        borderColor: '#018786',
         borderRadius: 5,
         color: '#FFF',
         height: 70,
         width: 160,
         padding: 10,
-        fontSize: 16
+        fontSize: 17,
+        fontFamily: 'Raleway-Bold'
     },
     resultView: {
         flex: 1,
@@ -87,13 +107,14 @@ const styles = StyleSheet.create({
     },
     resultText: {
         fontWeight: "400",
-        color: '#353535',
+        color: '#018786',
         fontSize: 16,
         marginVertical: 5,
-        textTransform: 'capitalize'
+        textTransform: 'capitalize',
+        fontFamily: 'Raleway-Medium'
     },
     resultContainer: {
-        height: 100,
+        height: 120,
         width: '80%',
         alignItems: 'center',
         marginVertical: 10,
@@ -103,9 +124,11 @@ const styles = StyleSheet.create({
     },
     header: {
         marginBottom: 5,
-        color: '#5A537B',
+        color: '#b00020',
+        fontSize: 18,
         fontWeight: "600",
-        textAlign: 'center'
+        textAlign: 'center',
+        fontFamily: 'Raleway-Bold'
     }
 })
 
