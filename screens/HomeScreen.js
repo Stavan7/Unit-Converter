@@ -71,8 +71,8 @@ class HomeScreen extends Component {
                         <Text style={styles.resultText}>{`${inputVal} kilogram = ${Math.round(inputVal * 2.204 * 1000) / 1000} pound`}</Text>
                         <Text style={styles.resultText}>{`${inputVal} pounds = ${Math.round(this.state.input * 0.453592 * 1000) / 1000} kilogram`}</Text>
                     </View>
-
                 </View>
+
             </SafeAreaView>
         )
     }
